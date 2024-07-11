@@ -1,0 +1,19 @@
+.navclr{
+    background-color: #1998ff;
+}
+.body{
+    background-color: #E0F4FF;
+
+}
+.lnkclr{
+    color: #ffffff; 
+}
+.row{
+    background-color: #add4fc;
+}
+.displaynone{
+    display: none;
+}
+#user-info{
+    display: none;
+}

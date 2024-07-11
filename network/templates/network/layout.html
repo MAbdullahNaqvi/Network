@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social Network{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        {% block script %}
+
+        {% endblock %}
+    </head>
+    <body>
+        <div id="user-info" data-username="{{ user.username }}" data-user-id="{{ user.id }}"></div>
+        <nav class="navbar navclr navbar-expand-lg navbar-dark ">
+            <a class="navbar-brand fw-bolder fs-3" href="#">Network</a>
+          
+            <div class="navclr">
+              <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        {% if active == "MyProfile" %} <a class="nav-link active lnkclr" href="{% url 'index' %}">{{ user.username }}</a>
+                        {% else %} <a class="nav-link lnkclr" href="{% url 'accounts' user.id %}">{{ user.username }}</a>{% endif %}
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    {% if active == "index" %}<a class="nav-link active lnkclr" href="{% url 'index' %}">All Posts</a>
+                    {% else %} <a class="nav-link lnkclr" href="{% url 'index' %}">All Posts</a>{% endif %}
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        {% if active == "following" %}<a class="nav-link active lnkclr" href="#">Following</a>
+                        {% else %}<a class="nav-link lnkclr" href="#">Following</a>{% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link lnkclr" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        {% if active == "login" %}<a class="nav-link active lnkclr" href="{% url 'login' %}">Log In</a>
+                        {% else %}<a class="nav-link lnkclr" href="{% url 'login' %}">Log In</a>{% endif %}
+                    </li>
+                    <li class="nav-item">
+                        {% if active == "register" %}<a class="nav-link active lnkclr" href="{% url 'register' %}">Register</a>
+                        {% else %}<a class="nav-link lnkclr" href="{% url 'register' %}">Register</a>{% endif %}
+                    </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'network/network.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+ <p class="fs-1 fw-bold ms-4 text-secondary">All Posts</p>
+    <div class="container-fluid px-4"  id="index-page">
+        {% if user.is_authenticated %}
+            <div class="row border border-secondary mb-2 px-4 pb-2 gy-2 rounded " id="Create-Post-div">
+        {% else %}
+            <div class="row border border-secondary mb-2 px-4 pb-2 gy-2 rounded displaynone" id="Create-Post-div">
+        {% endif %}
+            <div class="col order-3">
+                <span class="fs-3 fw-400 text-secondary">New Post</span>
+            </div>
+            <div class="w-100 order-4"></div>
+            <div class="col order-5">
+                <div class="input-group">
+                    <textarea id="content" class="form-control post" placeholder="Type Your Post Here"></textarea>
+                </div>
+                <button class="border-0 btn-primary fw-bolder fs-5 mt-1 rounded " id="Postbtn">Post</button>                    
+            </div>
+        </div>
+    </div>
+{% endblock %}
